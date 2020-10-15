@@ -30,14 +30,14 @@ public class DriveTimed extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    /*if(m_timer.get() < 10.0){
+    if(m_timer.get() < 10.0){
       System.out.println("forwards");
       Robot.m_drivetrain.tankDrive(0.3, 0.3);
     }
     /*else if(m_timer.get() < 15.0){
       System.out.println("turn");
       Robot.m_drivetrain.tankDrive(-0.3, 0.3);
-    }
+    }*/
     else if(m_timer.get() < 15.0){
       System.out.println("backwards");
       Robot.m_drivetrain.tankDrive(-0.3, -0.3);
@@ -45,7 +45,7 @@ public class DriveTimed extends Command {
     else if(m_timer.get() < 25.0){
       System.out.println("forwards");
       Robot.m_drivetrain.tankDrive(0.3, 0.3);
-    }*/
+    }
   }
 
   // Make this return true when this Command no longer needs to run execute()

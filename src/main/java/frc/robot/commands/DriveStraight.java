@@ -25,25 +25,26 @@ public class DriveStraight extends Command {
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-    System.out.println("INIT: trying to use encoders");
-    Robot.m_drivetrain.resetEncoders();
+    System.out.println("INIT");
+    Robot.m_drivetrain.resetCounters();
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
     //Robot.m_drivetrain.printDistance();
-    System.out.println("EXECUTE: trying to use encoders");
+    System.out.println("EXECUTE");
     Robot.m_drivetrain.tankDrive(motorPower, motorPower);   
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    /*if(Math.abs(Robot.m_drivetrain.returnDistance()) > distance){
+    /*(if(Math.abs(Robot.m_drivetrain.returnDistance()) > distance){
       return true;
     }*/
-    Robot.m_drivetrain.printDistance(); //PROBLEM W/ ENCODERS JUST PRINTING OUT 0.0 FOR DISTANCE!
+    Robot.m_drivetrain.printDistance(); 
+    Robot.m_drivetrain.printPeriod();
     return false;
   }
 
