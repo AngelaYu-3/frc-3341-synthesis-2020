@@ -25,62 +25,66 @@ public class DriveTrain<DutyCycleEncoder> extends Subsystem {
   // here. Call these from Commands.
 
   private PWMTalonSRX left = new PWMTalonSRX(RobotMap.leftDrivePort), right = new PWMTalonSRX(RobotMap.rightDrivePort);
-  //private Encoder leftEncoder = new Encoder(RobotMap.leftEncoderA, RobotMap.leftEncoderB);
-  //private Encoder rightEncoder = new Encoder(RobotMap.rightEncoderA, RobotMap.rightEncoderB);
-  private Counter leftCount = new Counter(0);
-  private Counter rightCount = new Counter(1);
+  private Encoder leftEncoder = new Encoder(RobotMap.leftEncoderA, RobotMap.leftEncoderB);
+  private Encoder rightEncoder = new Encoder(RobotMap.rightEncoderA, RobotMap.rightEncoderB);
+  //private Counter leftCount = new Counter(0);
+  //private Counter rightCount = new Counter(1);
 
   public DriveTrain() {
 
     left.setInverted(true);
-    leftCount.setUpSource(1);
+    /*leftCount.setUpSource(1);
     leftCount.setUpDownCounterMode();
 
     rightCount.setUpSource(1);
     rightCount.setUpDownCounterMode();
 
     leftCount.setDistancePerPulse(10);
-    rightCount.setDistancePerPulse(10);
+    rightCount.setDistancePerPulse(10);*/
 
     
-    /*leftEncoder.reset();
+    leftEncoder.reset();
     rightEncoder.reset();
     leftEncoder.setDistancePerPulse(0.05);
-    rightEncoder.setDistancePerPulse(0.05);*/
+    rightEncoder.setDistancePerPulse(0.05);
   }
 
-  public void tankDrive(double lpower, double rpower) {
+  public void tankDrive(double lspeed, double rspeed) {
       
       // make controls not too sensitive
-      if (lpower < 0.05 && lpower > -0.05){
-          lpower = 0;
+      if (lspeed < 0.05 && lspeed > -0.05){
+        lspeed = 0;
       }
-      if (rpower < 0.05 && rpower > -0.05){
-        rpower = 0;
+      if (rspeed < 0.05 && rspeed > -0.05){
+        rspeed = 0;
       }
 
-      left.set(lpower);
-      right.set(rpower);
+      left.set(lspeed);
+      right.set(rspeed);
     }
 
   public double returnDistance(){
-    double leftDistance = leftCount.getDistance();
-    double rightDistance = rightCount.getDistance();
+    double leftDistance = leftEncoder.getDistance();
+    double rightDistance = rightEncoder.getDistance();
+    //double leftDistance = leftCount.getDistance();
+   // double rightDistance = rightCount.getDistance();
     return (leftDistance + rightDistance)/2;
   }
 
   public void resetCounters(){
-    leftCount.reset();
-    rightCount.reset();
+    leftEncoder.reset();
+    rightEncoder.reset();
+    //leftCount.reset();
+    //rightCount.reset();
   }
 
   public void printDistance(){
     System.out.println(returnDistance());
   }
 
-  public void printPeriod(){
+  /*public void printPeriod(){
     System.out.println((leftCount.getPeriod() + rightCount.getPeriod())/2);
-  }
+  }*/
 
   @Override
   public void initDefaultCommand() {
@@ -91,6 +95,6 @@ public class DriveTrain<DutyCycleEncoder> extends Subsystem {
   @Override
   public void periodic() {
     //System.out.println("driving");
-    tankDrive(Robot.m_oi.xBox.getRawAxis(RobotMap.leftJoy), Robot.m_oi.xBox.getRawAxis(RobotMap.rightJoy));
+    tankDrive(-Robot.m_oi.xBox.getRawAxis(RobotMap.leftJoy), -Robot.m_oi.xBox.getRawAxis(RobotMap.rightJoy));
   }
 }

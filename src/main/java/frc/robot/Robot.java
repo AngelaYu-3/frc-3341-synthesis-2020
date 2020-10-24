@@ -39,7 +39,7 @@ public class Robot extends TimedRobot {
   public void robotInit() {
     m_oi = new OI();
     m_drivetrain = new DriveTrain();
-    m_autonomousCommand = new DriveStraight(0.5, 20.0);
+    m_autonomousCommand = new DriveStraight(.5);
     
     //m_chooser.setDefaultOption("Default Auto", new ExampleCommand());
     // chooser.addOption("My Auto", new MyAutoCommand());
@@ -86,7 +86,21 @@ public class Robot extends TimedRobot {
   @Override
   public void autonomousInit() {
     System.out.println("auto initialized");
-    if (m_autonomousCommand != null) m_autonomousCommand.start();
+   
+
+    //boolean isNumber = false;
+    String gameData = DriverStation.getInstance().getGameSpecificMessage();
+    
+    if(gameData.length() > 0){
+        System.out.println(gameData);
+        m_autonomousCommand = new DriveStraight(Integer.parseInt(gameData));
+    }
+    else{
+      m_autonomousCommand = new DriveStraight(.5);
+    }
+    
+    if (m_autonomousCommand != null) m_autonomousCommand.start();   
+  
   }
     
     /*
