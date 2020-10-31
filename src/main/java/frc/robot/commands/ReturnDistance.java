@@ -11,16 +11,20 @@ import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
-public class DriveStraight extends Command {
-  private double motorSpeed = 0.5;
-  private double distance;
-  private Timer timer = new Timer();
-  private double time = Math.abs(distance/motorSpeed);
+public class ReturnDistance extends Command {
+  private double force = 0.05; //estimated (N)
+  private double radius = 0.07; //estimated with Synthesis measuring tool (m)
+  private double power = 0.5;
 
-  public DriveStraight(double distance) {
-    // Use requires() here to declare subsystem dependencies
-    // eg. requires(chassis);
-    this.distance = distance;
+  private double timeNeeded;
+  private Timer timer = new Timer();
+
+  public ReturnDistance(double distance) {
+    double motorVel = power/force;
+    double timePerRot = motorVel/(2*Math.PI*radius);
+    double numRot = distance/(2*Math.PI*radius);
+    timeNeeded = timePerRot * numRot;
+    
     requires(Robot.m_drivetrain);
   }
 
@@ -37,23 +41,19 @@ public class DriveStraight extends Command {
   protected void execute() {
     //Robot.m_drivetrain.printDistance();
     System.out.println("EXECUTE");
-    Robot.m_drivetrain.tankDrive(motorSpeed, motorSpeed);   
+    Robot.m_drivetrain.tankDrive(power, power);   
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
     System.out.println("TIME" + timer.get());
-    if(timer.get() > time){
+
+    if(timer.get() >= timeNeeded){
+      Robot.m_drivetrain.tankDrive(0, 0);
       return true;
     }
     return false;
-
-        /*(if(Math.abs(Robot.m_drivetrain.returnDistance()) > distance){
-      return true;
-    }
-    Robot.m_drivetrain.printDistance(); */
-    //Robot.m_drivetrain.printPeriod();
   }
 
   // Called once after isFinished returns true

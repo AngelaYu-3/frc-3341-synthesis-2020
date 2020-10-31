@@ -10,6 +10,10 @@ package frc.robot.subsystems;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.Robot;
 import frc.robot.RobotMap;
+
+import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+
 import edu.wpi.first.wpilibj.Counter;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.PWMTalonSRX;
@@ -24,7 +28,8 @@ public class DriveTrain<DutyCycleEncoder> extends Subsystem {
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
 
-  private PWMTalonSRX left = new PWMTalonSRX(RobotMap.leftDrivePort), right = new PWMTalonSRX(RobotMap.rightDrivePort);
+  //private PWMTalonSRX left = new PWMTalonSRX(RobotMap.leftDrivePort), right = new PWMTalonSRX(RobotMap.rightDrivePort);
+  private TalonSRX left = new TalonSRX(RobotMap.leftDrivePort), right = new TalonSRX(RobotMap.rightDrivePort);
   private Encoder leftEncoder = new Encoder(RobotMap.leftEncoderA, RobotMap.leftEncoderB);
   private Encoder rightEncoder = new Encoder(RobotMap.rightEncoderA, RobotMap.rightEncoderB);
   //private Counter leftCount = new Counter(0);
@@ -59,8 +64,8 @@ public class DriveTrain<DutyCycleEncoder> extends Subsystem {
         rspeed = 0;
       }
 
-      left.set(lspeed);
-      right.set(rspeed);
+      left.set(ControlMode.PercentOutput, lspeed);
+      right.set(ControlMode.PercentOutput, rspeed);
     }
 
   public double returnDistance(){
@@ -95,6 +100,6 @@ public class DriveTrain<DutyCycleEncoder> extends Subsystem {
   @Override
   public void periodic() {
     //System.out.println("driving");
-    tankDrive(-Robot.m_oi.xBox.getRawAxis(RobotMap.leftJoy), -Robot.m_oi.xBox.getRawAxis(RobotMap.rightJoy));
+    tankDrive(-Robot.m_oi.getxBox().getRawAxis(RobotMap.leftJoy), -Robot.m_oi.getxBox().getRawAxis(RobotMap.rightJoy));
   }
 }
