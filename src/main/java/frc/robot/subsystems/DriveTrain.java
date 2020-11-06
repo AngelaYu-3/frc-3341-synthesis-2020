@@ -54,18 +54,18 @@ public class DriveTrain<DutyCycleEncoder> extends Subsystem {
     rightEncoder.setDistancePerPulse(0.05);
   }
 
-  public void tankDrive(double lspeed, double rspeed) {
+  public void tankDrive(double lpower, double rpower) {
       
       // make controls not too sensitive
-      if (lspeed < 0.05 && lspeed > -0.05){
-        lspeed = 0;
+      if (lpower < 0.05 && lpower > -0.05){
+        lpower = 0;
       }
-      if (rspeed < 0.05 && rspeed > -0.05){
-        rspeed = 0;
+      if (rpower < 0.05 && rpower > -0.05){
+        rpower = 0;
       }
 
-      left.set(lspeed);
-      right.set(rspeed);
+      left.set(lpower);
+      right.set(rpower);
     }
 
   public double returnDistance(){

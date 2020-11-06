@@ -42,7 +42,6 @@ public class Robot extends TimedRobot {
     m_oi = new OI();
     m_drivetrain = new DriveTrain();
     m_elevator = new Elevator();
-    m_autonomousCommand = new ReturnDistance(.5);
     
     //m_chooser.setDefaultOption("Default Auto", new ExampleCommand());
     // chooser.addOption("My Auto", new MyAutoCommand());
@@ -96,10 +95,10 @@ public class Robot extends TimedRobot {
     
     if(gameData.length() > 0){
         System.out.println(gameData);
-        m_autonomousCommand = new ReturnDistance(Double.parseDouble(gameData));
+        m_autonomousCommand = new DriveDistance(Double.parseDouble(gameData));
     }
     else{
-      m_autonomousCommand = new ReturnDistance(.5);
+      m_autonomousCommand = new DriveDistance(.5);
     }
     
     if (m_autonomousCommand != null) m_autonomousCommand.start();   

@@ -11,7 +11,7 @@ import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
-public class ReturnDistance extends Command {
+public class DriveDistance extends Command {
   private double force = 0.05; //estimated (N)
   private double radius = 0.07; //estimated with Synthesis measuring tool (m)
   private double power = 0.5;
@@ -19,7 +19,7 @@ public class ReturnDistance extends Command {
   private double timeNeeded;
   private Timer timer = new Timer();
 
-  public ReturnDistance(double distance) {
+  public DriveDistance(double distance) {
     double motorVel = power/force;
     double timePerRot = motorVel/(2*Math.PI*radius);
     double numRot = distance/(2*Math.PI*radius);
