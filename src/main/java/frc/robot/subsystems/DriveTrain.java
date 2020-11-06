@@ -28,8 +28,8 @@ public class DriveTrain<DutyCycleEncoder> extends Subsystem {
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
 
-  //private PWMTalonSRX left = new PWMTalonSRX(RobotMap.leftDrivePort), right = new PWMTalonSRX(RobotMap.rightDrivePort);
-  private TalonSRX left = new TalonSRX(RobotMap.leftDrivePort), right = new TalonSRX(RobotMap.rightDrivePort);
+  private PWMTalonSRX left = new PWMTalonSRX(RobotMap.leftDrivePort), right = new PWMTalonSRX(RobotMap.rightDrivePort);
+  //private TalonSRX left = new TalonSRX(RobotMap.leftDrivePort), right = new TalonSRX(RobotMap.rightDrivePort);
   private Encoder leftEncoder = new Encoder(RobotMap.leftEncoderA, RobotMap.leftEncoderB);
   private Encoder rightEncoder = new Encoder(RobotMap.rightEncoderA, RobotMap.rightEncoderB);
   //private Counter leftCount = new Counter(0);
@@ -64,8 +64,8 @@ public class DriveTrain<DutyCycleEncoder> extends Subsystem {
         rspeed = 0;
       }
 
-      left.set(ControlMode.PercentOutput, lspeed);
-      right.set(ControlMode.PercentOutput, rspeed);
+      left.set(lspeed);
+      right.set(rspeed);
     }
 
   public double returnDistance(){
