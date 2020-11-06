@@ -47,19 +47,6 @@ public class Elevator extends Subsystem {
     elevator.setNeutralMode(mode);
   }*/
 
-  /*public void periodic(){
-      boolean downElev = Robot.m_oi.getxBox().getRawButton(3);
-      boolean upElev = Robot.m_oi.getxBox().getRawButton(4);
-
-      if(downElev){
-        move(0.5);
-      }
-      
-      if(upElev){
-        move(-0.5);
-      }
-  }*/
-
   @Override
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.
