@@ -25,7 +25,7 @@ public class Elevator extends Subsystem {
   // here. Call these from Commands.
 
  // private PWMTalonSRX elevator = new PWMTalonSRX(RobotMap.elevatorPort);
-  private PWMTalonSRX elevator = new PWMTalonSRX(2);
+  private PWMTalonSRX elevator = new PWMTalonSRX(3);
 
   public Elevator(){
     //enableMotors(false); 
@@ -51,5 +51,16 @@ public class Elevator extends Subsystem {
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.
     // setDefaultCommand(new MySpecialCommand());
+  }
+
+  @Override
+  public void periodic(){
+    if (Robot.m_oi.getxBox().getRawButton(4)) {
+      elevator.set(0.5);
+    } else if (Robot.m_oi.getxBox().getRawButton(5)) {
+      elevator.set(-0.5);
+    } else {
+      elevator.set(0);
+    }
   }
 }

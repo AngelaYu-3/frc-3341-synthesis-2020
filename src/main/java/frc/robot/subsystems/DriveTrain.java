@@ -30,10 +30,9 @@ public class DriveTrain<DutyCycleEncoder> extends Subsystem {
 
   private PWMTalonSRX left = new PWMTalonSRX(RobotMap.leftDrivePort), right = new PWMTalonSRX(RobotMap.rightDrivePort);
   //private TalonSRX left = new TalonSRX(RobotMap.leftDrivePort), right = new TalonSRX(RobotMap.rightDrivePort);
-  private Encoder leftEncoder = new Encoder(RobotMap.leftEncoderA, RobotMap.leftEncoderB);
-  private Encoder rightEncoder = new Encoder(RobotMap.rightEncoderA, RobotMap.rightEncoderB);
-  //private Counter leftCount = new Counter(0);
-  //private Counter rightCount = new Counter(1);
+  //private Encoder leftEncoder = new Encoder(RobotMap.leftEncoderA, RobotMap.leftEncoderB);
+  //private Encoder rightEncoder = new Encoder(RobotMap.rightEncoderA, RobotMap.rightEncoderB);
+ 
 
   public DriveTrain() {
 
@@ -48,10 +47,10 @@ public class DriveTrain<DutyCycleEncoder> extends Subsystem {
     rightCount.setDistancePerPulse(10);*/
 
     
-    leftEncoder.reset();
+    /*leftEncoder.reset();
     rightEncoder.reset();
     leftEncoder.setDistancePerPulse(0.05);
-    rightEncoder.setDistancePerPulse(0.05);
+    rightEncoder.setDistancePerPulse(0.05);*/
   }
 
   public void tankDrive(double lpower, double rpower) {
@@ -68,25 +67,6 @@ public class DriveTrain<DutyCycleEncoder> extends Subsystem {
       right.set(rpower);
     }
 
-  public double returnDistance(){
-    double leftDistance = leftEncoder.getDistance();
-    double rightDistance = rightEncoder.getDistance();
-    //double leftDistance = leftCount.getDistance();
-   // double rightDistance = rightCount.getDistance();
-    return (leftDistance + rightDistance)/2;
-  }
-
-  public void resetCounters(){
-    leftEncoder.reset();
-    rightEncoder.reset();
-    //leftCount.reset();
-    //rightCount.reset();
-  }
-
-  public void printDistance(){
-    System.out.println(returnDistance());
-  }
-
   /*public void printPeriod(){
     System.out.println((leftCount.getPeriod() + rightCount.getPeriod())/2);
   }*/
@@ -99,7 +79,7 @@ public class DriveTrain<DutyCycleEncoder> extends Subsystem {
 
   @Override
   public void periodic() {
-    //System.out.println("driving");
+    System.out.println("driving");
     tankDrive(-Robot.m_oi.getxBox().getRawAxis(RobotMap.leftJoy), -Robot.m_oi.getxBox().getRawAxis(RobotMap.rightJoy));
   }
 }

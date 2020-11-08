@@ -52,8 +52,8 @@ public class OI {
 
   public OI(){
       System.out.println("Buttons");
-      button4.whileHeld(new MoveElevator(0.5));   
-      button5.whileHeld(new MoveElevator(-0.5));  
+      //button4.whileHeld(new MoveElevator(0.5));   
+      //button5.whileHeld(new MoveElevator(-0.5));  
   }
 
   public Joystick getxBox(){

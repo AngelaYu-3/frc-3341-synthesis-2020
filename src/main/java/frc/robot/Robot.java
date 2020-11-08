@@ -95,10 +95,10 @@ public class Robot extends TimedRobot {
     
     if(gameData.length() > 0){
         System.out.println(gameData);
-        m_autonomousCommand = new DriveDistance(Double.parseDouble(gameData));
+        m_autonomousCommand = new PIDDriveDistance(Double.parseDouble(gameData));
     }
     else{
-      m_autonomousCommand = new DriveDistance(.5);
+      m_autonomousCommand = new PIDDriveDistance(.5);
     }
     
     if (m_autonomousCommand != null) m_autonomousCommand.start();   

@@ -12,8 +12,7 @@ import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
 public class DriveDistance extends Command {
-  private double force = 0.05; //estimated (N)
-  private double radius = 0.07; //estimated with Synthesis measuring tool (m)
+  private double force = .005; //estimated (N)
   private double power = 0.5;
 
   private double timeNeeded;
@@ -21,9 +20,7 @@ public class DriveDistance extends Command {
 
   public DriveDistance(double distance) {
     double motorVel = power/force;
-    double timePerRot = motorVel/(2*Math.PI*radius);
-    double numRot = distance/(2*Math.PI*radius);
-    timeNeeded = timePerRot * numRot;
+    timeNeeded = distance/motorVel;
     
     requires(Robot.m_drivetrain);
   }
