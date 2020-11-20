@@ -79,7 +79,7 @@ public class DriveTrain<DutyCycleEncoder> extends Subsystem {
 
   @Override
   public void periodic() {
-    System.out.println("driving");
-    tankDrive(-Robot.m_oi.getxBox().getRawAxis(RobotMap.leftJoy), -Robot.m_oi.getxBox().getRawAxis(RobotMap.rightJoy));
+    //System.out.println("driving");
+    //tankDrive(-Robot.m_oi.getxBox().getRawAxis(RobotMap.leftJoy), -Robot.m_oi.getxBox().getRawAxis(RobotMap.rightJoy));
   }
 }

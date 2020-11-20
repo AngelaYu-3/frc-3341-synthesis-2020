@@ -11,7 +11,7 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
-import frc.robot.commands.MoveElevator;
+import frc.robot.commands.MoveArm;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -51,9 +51,9 @@ public class OI {
   public Button button5 = new JoystickButton(xBox, 5);
 
   public OI(){
-      System.out.println("Buttons");
-      //button4.whileHeld(new MoveElevator(0.5));   
-      //button5.whileHeld(new MoveElevator(-0.5));  
+      //System.out.println("Buttons");
+      button4.whileHeld(new MoveArm(1.0));   
+      button5.whileHeld(new MoveArm(-1.0));  
   }
 
   public Joystick getxBox(){

@@ -14,8 +14,9 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.commands.*;
+import frc.robot.subsystems.Arm;
 import frc.robot.subsystems.DriveTrain;
-import frc.robot.subsystems.Elevator;
+import frc.robot.subsystems.Encoder;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -28,7 +29,8 @@ public class Robot extends TimedRobot {
   //public static ExampleSubsystem m_subsystem = new ExampleSubsystem();
   public static OI m_oi;
   public static DriveTrain m_drivetrain;
-  public static Elevator m_elevator;
+  public static Arm m_arm;
+  public static Encoder m_encoder;
 
   Command m_autonomousCommand;
   SendableChooser<Command> m_chooser = new SendableChooser<>();
@@ -41,7 +43,8 @@ public class Robot extends TimedRobot {
   public void robotInit() {
     m_oi = new OI();
     m_drivetrain = new DriveTrain();
-    m_elevator = new Elevator();
+    m_arm = new Arm();
+    m_encoder = new Encoder(0.0); 
     
     //m_chooser.setDefaultOption("Default Auto", new ExampleCommand());
     // chooser.addOption("My Auto", new MyAutoCommand());
@@ -98,7 +101,7 @@ public class Robot extends TimedRobot {
         m_autonomousCommand = new PIDDriveDistance(Double.parseDouble(gameData));
     }
     else{
-      m_autonomousCommand = new PIDDriveDistance(.5);
+      m_autonomousCommand = new DriveTest();
     }
     
     if (m_autonomousCommand != null) m_autonomousCommand.start();   

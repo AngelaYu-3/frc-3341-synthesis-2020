@@ -20,19 +20,19 @@ import frc.robot.RobotMap;
 /**
  * Add your docs here.
  */
-public class Elevator extends Subsystem {
+public class Arm extends Subsystem {
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
 
  // private PWMTalonSRX elevator = new PWMTalonSRX(RobotMap.elevatorPort);
-  private PWMTalonSRX elevator = new PWMTalonSRX(3);
+  private PWMTalonSRX arm  = new PWMTalonSRX(2);
 
-  public Elevator(){
+  public Arm(){
     //enableMotors(false); 
   }
 
   public void move(double power){
-    elevator.set(power);
+    arm.set(power);
   }
 
   /*public void enableMotors(boolean on){
@@ -55,12 +55,12 @@ public class Elevator extends Subsystem {
 
   @Override
   public void periodic(){
-    if (Robot.m_oi.getxBox().getRawButton(4)) {
-      elevator.set(0.5);
+    /*if (Robot.m_oi.getxBox().getRawButton(4)) {
+      arm.set(-1.0);
     } else if (Robot.m_oi.getxBox().getRawButton(5)) {
-      elevator.set(-0.5);
+      arm.set(1.0);
     } else {
-      elevator.set(0);
-    }
+      arm.set(0);
+    }*/
   }
 }

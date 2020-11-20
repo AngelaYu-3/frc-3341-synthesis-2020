@@ -10,14 +10,14 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
-public class MoveElevator extends Command {
+public class MoveArm extends Command {
   private double power;
 
-  public MoveElevator(double power) {
+  public MoveArm(double power) {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
     this.power = power;
-    requires(Robot.m_elevator);
+    requires(Robot.m_arm);
   }
 
   // Called just before this Command runs the first time
@@ -32,7 +32,7 @@ public class MoveElevator extends Command {
   @Override
   protected void execute() {
     System.out.println("Elevator execute");
-    Robot.m_elevator.move(power);
+    Robot.m_arm.move(power);
   }
 
   // Make this return true when this Command no longer needs to run execute()
@@ -45,7 +45,7 @@ public class MoveElevator extends Command {
   @Override
   protected void end() {
     //setting motor to coast mode
-    Robot.m_elevator.move(0);
+    Robot.m_arm.move(0);
     //Robot.m_elevator.enableMotors(false);
   }
 
@@ -54,7 +54,7 @@ public class MoveElevator extends Command {
   @Override
   protected void interrupted() {
     //setting motor to coast mode
-    Robot.m_elevator.move(0);
+    Robot.m_arm.move(0);
     //Robot.m_elevator.enableMotors(false);
   }
 }
